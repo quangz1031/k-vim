@@ -495,7 +495,7 @@ autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,pe
 
 
 " 定义函数AutoSetFileHead，自动插入文件头
-autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
+autocmd BufNewFile *.sh,*.py,*.pl exec ":call AutoSetFileHead()"
 function! AutoSetFileHead()
     "如果文件类型为.sh文件
     if &filetype == 'sh'
@@ -506,6 +506,11 @@ function! AutoSetFileHead()
     if &filetype == 'python'
         call setline(1, "\#!/usr/bin/env python")
         call append(1, "\# encoding: utf-8")
+    endif
+
+    if &filetype == 'perl'
+        call setline(1, "\#!/usr/bin/perl -w")
+        call append(1, "")
     endif
 
     normal G
@@ -542,7 +547,7 @@ set background=dark
 colorscheme solarized
 set t_Co=256
 
-"colorscheme molokai
+colorscheme molokai
 "colorscheme desert
 
 "设置标记一列的背景颜色和数字一行颜色一致
@@ -560,4 +565,17 @@ highlight SpellRare term=underline cterm=underline
 highlight clear SpellLocal
 highlight SpellLocal term=underline cterm=underline
 
-
+" 直接跳过又括号等
+inoremap <expr> <Tab> SkipClosingParentheses()
+ 
+function! SkipClosingParentheses()
+  let line = getline('.')
+  let current_char = line[col('.')-1]
+ 
+  "Ignore EOL
+  if col('.') == col('$')
+    return "\t"
+  end
+ 
+  return stridx(']})', current_char)==-1 ? "\t" : "\<Right>"
+endfunction
