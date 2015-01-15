@@ -396,7 +396,9 @@ map <leader>tm :tabm<cr>
 
 
 " 新建tab  Ctrl+t
-nnoremap <C-t>     :tabnew<CR>
+" nnoremap <C-t>     :tabnew<CR>
+" inoremap <C-t>     <Esc>:tabnew<CR>
+nnoremap t     :tabnew<CR>
 inoremap <C-t>     <Esc>:tabnew<CR>
 " TODO: 配置成功这里, 切换更方便, 两个键
 " nnoremap <C-S-tab> :tabprevious<CR>
