@@ -506,3 +506,6 @@ Bundle 'Glench/Vim-Jinja2-Syntax'
 "------------------------------------------- end of configs --------------------------------------------
 "##### nginx #########
 Bundle 'quangz1031/nginx-vim-syntax.git'
+"##### lua ######
+" Bundle 'xolox/vim-misc'
+" Bundle 'xolox/vim-lua-ftplugin'
