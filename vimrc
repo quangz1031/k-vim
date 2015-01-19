@@ -394,6 +394,9 @@ map <leader>te :tabedit<cr>
 map <leader>td :tabclose<cr>
 map <leader>tm :tabm<cr>
 
+" 添加call hierachy
+nnoremap <F7>     :cs f c <cword><CR>
+inoremap <F7>     <Esc>:cs f c <cword><CR>
 
 " 新建tab  Ctrl+t
 " nnoremap <C-t>     :tabnew<CR>
