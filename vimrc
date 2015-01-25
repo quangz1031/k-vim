@@ -500,11 +500,26 @@ autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,pe
 
 
 " 定义函数AutoSetFileHead，自动插入文件头
-autocmd BufNewFile *.sh,*.py,*.pl exec ":call AutoSetFileHead()"
+autocmd BufNewFile *.sh,*.py,*.pl,*rb exec ":call AutoSetFileHead()"
 function! AutoSetFileHead()
     "如果文件类型为.sh文件
     if &filetype == 'sh'
         call setline(1, "\#!/bin/bash")
+        call append(1,"\# Program:")
+        " call append(2,"\# \tDescription")
+        call append(2,"\# \t")
+        " let cursorpos = getpos('.')
+        call append(3,"\# " . strftime("%Y/%m/%d") . "\tJerry\tFirst release")
+        call append(4,"")
+        call append(5,"PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin")
+        call append(6,"export PATH")
+        " call setpos('.',cursorpos)
+        " call setpos('.',[0,3,3,0])
+        normal G
+        normal o
+        normal o
+        call cursor(3,3)
+        return
     endif
 
     "如果文件类型为python
@@ -515,6 +530,10 @@ function! AutoSetFileHead()
 
     if &filetype == 'perl'
         call setline(1, "\#!/usr/bin/perl -w")
+    endif
+    "如果文件类型为ruby
+    if &filetype == 'ruby'
+        call setline(1, "\#!/usr/bin/env ruby")
         call append(1, "")
     endif
 
@@ -549,7 +568,7 @@ endif
 
 " theme主题
 set background=dark
-colorscheme solarized
+" colorscheme solarized
 set t_Co=256
 
 colorscheme molokai
